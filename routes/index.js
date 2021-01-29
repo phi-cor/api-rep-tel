@@ -1,16 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var contactController= require('../controllers/contact-controller');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/contacts', function(req, res, next) {
   res.status(200).send({register:contactController.get})
 });
-router.post('/new',bodyParser.json, function(req, res, next) {
-  let data=req.bodyParser;
-  console.log(data);
-  res.status(204).send({toto:"ba"})
+router.post('/contacts/new', function(req, res, next) {
+  contactController.new(req.body);
+  console.log(contactController.get);
+  res.status(204).send();
+});
+router.delete('/contact/:id', function(req, res, next) {
+  contactController.del(req.params.id);
+  console.log(contactController.get);
+  res.status(202).send();
+});
+router.put('/contact/:id', function(req, res, next) {
+  contactController.update(req.params.id,req.body);
+  console.log(contactController.get);
+  res.status(200).send();
 });
 
 module.exports = router;

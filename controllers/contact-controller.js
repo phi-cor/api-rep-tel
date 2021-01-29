@@ -11,3 +11,15 @@ exports.get =
       _id:"1"
       }
       ];
+exports.new = (contact) =>{
+    this.get.push(contact);
+};
+exports.del = (contact) =>{
+    const found = this.get.find(element => element._id === contact);
+    this.get.splice(this.get.indexOf(found),1);
+};
+exports.update = (contactId,newContact) =>{
+    const found = this.get.find(element => element._id === contactId);
+    this.get[this.get.indexOf(found)]=newContact;
+};
+
